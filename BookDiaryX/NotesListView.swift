@@ -6,13 +6,26 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct NotesListView: View {
+    let book: Book
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List {
+            ForEach(book.notes) { note in
+
+                VStack {
+                    Text(note.title)
+                        .bold()
+                    Text(note.message)
+
+                }
+            }
+        }
     }
 }
 
-#Preview {
-    NotesListView()
-}
+//#Preview {
+//    NotesListView()
+//}
