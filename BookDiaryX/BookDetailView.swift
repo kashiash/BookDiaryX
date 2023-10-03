@@ -84,3 +84,17 @@ struct BookDetailView: View {
         .navigationTitle("Book Detail")
     }
 }
+
+#Preview {
+    do {
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try ModelContainer(for: Book.self, configurations: config)
+        let example = Book.generateRandomBook()
+
+        return BookDetailView(book: example)
+            .modelContainer(container)
+    } catch {
+        fatalError("Coś się zjebsuło")
+    }
+
+}

@@ -1164,3 +1164,42 @@ struct NotesListView: View {
 
 ![2023-10-03_12-49-20 (1)](2023-10-03_12-49-20%20(1).gif)
 
+
+
+Teraz, gdy dodaliśmy właściwość book lub note do widoków, nasza struktura podglądu nie będzie już działać. Co gorsza, nie możemy po prostu utworzyć tymczasowego obiektu Book w podglądzie, ponieważ SwiftData nie będzie wiedział, gdzie go utworzyć – nie ma aktywnego kontenera modelu ani kontekstu wokół.
+
+Aby to naprawić, musimy ręcznie utworzyć kontener modelu, a zrobimy to w bardzo szczególny sposób: ponieważ jest to kod podglądu z danymi przykładowymi, utworzymy kontener w pamięci, aby wszelkie obiekty podglądu, które tworzymy, nie były zapisywane, ale były tylko tymczasowe.
+
+To wymaga czterech kroków:
+
+1. Utworzenie niestandardowego obiektu **ModelConfiguration**, aby określić, że chcemy użyć pamięci podręcznej.
+2. Użycie tego obiektu do stworzenia **kontenera modelu**.
+3. Utworzenie przykładowego obiektu Destination zawierającego dane próbkowe. Ten obiekt zostanie automatycznie utworzony w kontenerze modelu, który właśnie stworzyliśmy.
+4. Przesłanie tego przykładowego obiektu i naszego kontenera modelu do np widoku BookDetailView, a następnie zwrócenie ich wszystkich.
+
+Do tej pory nie musieliśmy robić kroków 1 i 2, ponieważ wszystko to było obsługiwane przez modyfikator modelContainer() w pliku BookDiaryXApp.swift, ale teraz musimy to zrobić ręcznie, abyśmy mogli utworzyć obiekt Book do przekazania do widoku
+
+skonfigurujemy teraz podglad w BookDetailView:
+
+```swift
+#Preview {
+    do {
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try ModelContainer(for: Book.self, configurations: config)
+        let example = Book.generateRandomBook()
+
+        return BookDetailView(book: example)
+            .modelContainer(container)
+    } catch {
+        fatalError("Coś się zjebsuło")
+    }
+
+}
+
+```
+
+
+
+
+
+**Ważne: Jeśli próbujesz utworzyć instancję modelu SwiftData i nie istnieje już kontener modelu, twój podgląd może po prostu ulec awarii. Bądź ostrożny!**
