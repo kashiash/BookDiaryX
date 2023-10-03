@@ -14,6 +14,7 @@ struct BookDetailView: View {
     @Environment(\.dismiss) private var dismiss
 
     @State private var isEditing = false
+    @State private var showAddNewNote = false
 
     @State private var title: String = ""
     @State private var author: String = ""
@@ -54,6 +55,23 @@ struct BookDetailView: View {
                 Text(book.title)
                 Text(book.author)
                 Text(book.publishedYear.description)
+            }
+            Section("Notes") {
+                Button("Add new note") {
+                    showAddNewNote.toggle()
+                }
+                .sheet(isPresented: $showAddNewNote, content: {
+                    NavigationStack {
+                        AddNewNote(book: book)
+                    }
+                    .presentationDetents([.fraction(0.3)])
+                    .interactiveDismissDisabled()
+                })
+                if book.notes.isEmpty {
+                    ContentUnavailableView("No notes", systemImage: "note")
+                } else {
+                    NotesListView(book: book)
+                }
             }
         }
         .toolbar {
