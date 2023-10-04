@@ -12,6 +12,7 @@ struct GenreListView: View {
 
     @Query(sort: \Genre.name) private var genres: [Genre]
     @State private var presentAddNew: Bool = false
+    @Environment(\.modelContext) private var context
 
     var body: some View {
         NavigationStack {
@@ -19,6 +20,7 @@ struct GenreListView: View {
                 ForEach(genres) { genre in
                     Text(genre.name)
                 }
+                .onDelete(perform: deleteGenre)
             }
             .navigationTitle("Gatunki Literackie")
             .toolbar {
@@ -38,6 +40,17 @@ struct GenreListView: View {
             }
         }
 
+    }
+    private func deleteGenre(atOffsets indexSet: IndexSet) {
+        indexSet.forEach { index in
+            let genreToDelete = genres[index]
+            context.delete(genreToDelete)
+            do {
+                try context.save()
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
     }
 }
 
