@@ -24,6 +24,9 @@ final class Book {
     @Relationship(deleteRule: .cascade, inverse: \Note.book)
     var notes = [Note]()
 
+    @Relationship(deleteRule: .nullify, inverse: \Genre.books)
+    var genres = [Genre]()
+
     public static func generateRandomBook() -> Book {
 
         // Define arrays of first names and last names

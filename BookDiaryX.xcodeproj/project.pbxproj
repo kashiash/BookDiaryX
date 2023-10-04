@@ -21,6 +21,9 @@
 		760E5FDD2ACC1B4B00924BFF /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760E5FDC2ACC1B4B00924BFF /* Note.swift */; };
 		760E5FE02ACC205A00924BFF /* NotesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760E5FDF2ACC205A00924BFF /* NotesListView.swift */; };
 		760E5FE22ACC239400924BFF /* Readme.md in Resources */ = {isa = PBXBuildFile; fileRef = 760E5FE12ACC239400924BFF /* Readme.md */; };
+		760E60072ACDE73F00924BFF /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760E60062ACDE73F00924BFF /* Genre.swift */; };
+		760E600A2ACDE7B400924BFF /* GenreListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760E60092ACDE7B400924BFF /* GenreListView.swift */; };
+		760E600C2ACDED6100924BFF /* AddNewGenre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760E600B2ACDED6100924BFF /* AddNewGenre.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +43,9 @@
 		760E5FDC2ACC1B4B00924BFF /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		760E5FDF2ACC205A00924BFF /* NotesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesListView.swift; sourceTree = "<group>"; };
 		760E5FE12ACC239400924BFF /* Readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
+		760E60062ACDE73F00924BFF /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
+		760E60092ACDE7B400924BFF /* GenreListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreListView.swift; sourceTree = "<group>"; };
+		760E600B2ACDED6100924BFF /* AddNewGenre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewGenre.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,14 +79,13 @@
 		760E5FBE2ACC133B00924BFF /* BookDiaryX */ = {
 			isa = PBXGroup;
 			children = (
+				760E60082ACDE7A400924BFF /* Views */,
 				760E5FDE2ACC1B5B00924BFF /* Models */,
 				760E5FCF2ACC13F600924BFF /* AddNewBookView.swift */,
 				760E5FD12ACC13F600924BFF /* BookCellView.swift */,
 				760E5FCE2ACC13F600924BFF /* BookDetailView.swift */,
-				760E5FD22ACC13F600924BFF /* BookListView.swift */,
 				760E5FD32ACC13F600924BFF /* PreviewSampleData.swift */,
 				760E5FBF2ACC133B00924BFF /* BookDiaryXApp.swift */,
-				760E5FC12ACC133B00924BFF /* ContentView.swift */,
 				760E5FC32ACC133D00924BFF /* Assets.xcassets */,
 				760E5FC52ACC133D00924BFF /* BookDiaryX.entitlements */,
 				760E5FC62ACC133D00924BFF /* Preview Content */,
@@ -103,8 +108,20 @@
 			children = (
 				760E5FDC2ACC1B4B00924BFF /* Note.swift */,
 				760E5FD02ACC13F600924BFF /* Book.swift */,
+				760E60062ACDE73F00924BFF /* Genre.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		760E60082ACDE7A400924BFF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				760E5FC12ACC133B00924BFF /* ContentView.swift */,
+				760E5FD22ACC13F600924BFF /* BookListView.swift */,
+				760E60092ACDE7B400924BFF /* GenreListView.swift */,
+				760E600B2ACDED6100924BFF /* AddNewGenre.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -180,12 +197,15 @@
 			files = (
 				760E5FD92ACC13F600924BFF /* PreviewSampleData.swift in Sources */,
 				760E5FD52ACC13F600924BFF /* AddNewBookView.swift in Sources */,
+				760E600C2ACDED6100924BFF /* AddNewGenre.swift in Sources */,
 				760E5FD72ACC13F600924BFF /* BookCellView.swift in Sources */,
+				760E60072ACDE73F00924BFF /* Genre.swift in Sources */,
 				760E5FDB2ACC17E900924BFF /* AddNewNote.swift in Sources */,
 				760E5FC22ACC133B00924BFF /* ContentView.swift in Sources */,
 				760E5FDD2ACC1B4B00924BFF /* Note.swift in Sources */,
 				760E5FD42ACC13F600924BFF /* BookDetailView.swift in Sources */,
 				760E5FE02ACC205A00924BFF /* NotesListView.swift in Sources */,
+				760E600A2ACDE7B400924BFF /* GenreListView.swift in Sources */,
 				760E5FD62ACC13F600924BFF /* Book.swift in Sources */,
 				760E5FD82ACC13F600924BFF /* BookListView.swift in Sources */,
 				760E5FC02ACC133B00924BFF /* BookDiaryXApp.swift in Sources */,

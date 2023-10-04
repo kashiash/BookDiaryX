@@ -24,7 +24,7 @@ struct BookListView: View {
             .navigationTitle("Lista książek")
             .toolbar {
                 ToolbarItem() {
-                    Button("",systemImage: "plus"){
+                    Button("",systemImage: "wand.and.stars.inverse"){
                         context.insert(Book.generateRandomBook())
                     }
                 }
@@ -34,7 +34,7 @@ struct BookListView: View {
                     Button{
                         presentAddNew.toggle()
                     } label: {
-                        Image(systemName: "plus.circle.fill")
+                        Image(systemName: "doc.badge.plus")
                     }
                     .buttonStyle(.borderedProminent)
                     .sheet(isPresented: $presentAddNew, content: {

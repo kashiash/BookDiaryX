@@ -1203,3 +1203,197 @@ skonfigurujemy teraz podglad w BookDetailView:
 
 
 **Ważne: Jeśli próbujesz utworzyć instancję modelu SwiftData i nie istnieje już kontener modelu, twój podgląd może po prostu ulec awarii. Bądź ostrożny!**
+
+
+
+## Relacja Wiele do wielu czyli gatunki literackie
+
+Książki są kategoryzowane według gatunków literackich, dlatego byłoby logiczne, aby nasz dziennik książek zawierał klasyfikację gatunkową, która pomoże nam śledzić liczbę przeczytanych książek fabularnych i literatury faktu.
+
+Ponieważ jeden gatunek może mieć wiele książek, a z drugiej strony, jedna książka może być powiązana z wieloma gatunkami literackimi, ta sytuacja oferuje doskonałą okazję do przetestowania, jak SwiftData zarządza relacją wiele do wielu (N:N).
+
+Zaczniemy od dodania nowego modelu do naszego projektu.
+
+```swift
+import Foundation
+import SwiftData
+
+@Model
+final class Genre {
+    var name: String
+    var books = [Book]()
+    
+    init(name: String) {
+        self.name = name
+    }
+}
+```
+
+Zaktualizujemy także model książki, aby uwzględnić relację między modelami Genre a Book.
+
+Relacja między Book a Genre będzie używać reguły usuwania typu "nullify", co oznacza zerowanie relacji powiązanego modelu do usuniętego modelu. Definiując tę regułę usuwania, zapewniamy, że po usunięciu książki, kategoria gatunku nie zostanie usunięta.
+
+```swift
+import Foundation
+import SwiftData
+
+@Model
+final class Book {
+    ...
+    
+    @Relationship(deleteRule: .nullify, inverse: \Genre.books)
+    var genres = [Genre]()
+    
+    init(title: String, author: String, publishedYear: Int) {
+     ...
+    }
+}
+```
+
+Teraz dodamy widok, który pokaże wszystkie gatunki. Użyjemy makra Query do pobrania przechowywanych rekordów dla modelu Genre.
+
+```swift
+import SwiftUI
+import SwiftData
+
+struct GenreListView: View {
+    
+    @Query(sort: \Genre.name) private var genres: [Genre]
+    
+    var body: some View {
+        NavigationStack {
+            List {
+                ForEach(genres) { genre in
+                    Text(genre.name)
+                }
+            }
+            .navigationTitle("Gatunki Literackie")
+        }
+    }
+}
+
+#Podgląd {
+    GenreListView()
+}
+```
+
+Następnie dodamy ten widok do ContentView. Nasza aplikacja będzie wyświetlać książki i gatunki wewnątrz TabView.
+
+```swift
+import SwiftUI
+
+struct ContentView: View {
+    var body: some View {
+        TabView {
+            BookListView()
+                .tabItem {
+                    Image(systemName: "books.vertical.fill")
+                    Text("Książki")
+                }
+            GenreListView()
+                .tabItem {
+                    Image(systemName: "gear.circle")
+                    Text("Gatunki")
+                }
+        }
+    }
+}
+
+#Podgląd {
+    ContentView()
+}
+```
+
+Zbuduj i uruchom aplikację.
+
+
+
+### Widok do dodawania nowych gatunków `AddNewGenre`
+
+Następnie dodamy widok do tworzenia nowej kategorii gatunkowej. Ten widok będzie prezentowany jako dolny panel (bottom sheet) i będzie zawierać pojedyncze pole tekstowe (TextField), które pozwoli dodać nowy gatunek.
+
+```swift
+import SwiftUI
+import SwiftData
+
+struct AddNewGenre: View {
+    @State private var name: String = ""
+    
+    @Environment(\.modelContext) private var context
+    @Environment(\.dismiss) private var dismiss
+    
+    var body: some View {
+        NavigationStack {
+            VStack {
+                TextField("Dodaj nowy gatunek", text: $name)
+                    .textFieldStyle(.roundedBorder)
+                    .navigationTitle("Dodaj nowy gatunek")
+                    .padding(.horizontal)
+                
+                HStack {
+                    Button("Zapisz") {
+                        let genre = Genre(name: name)
+                        context.insert(genre)
+                        do {
+                            try context.save()
+                        } catch {
+                            print(error.localizedDescription)
+                        }
+                        dismiss()
+                    }
+                    .buttonStyle(.borderedProminent)
+                    
+                    Button("Anuluj") {
+                        dismiss()
+                    }
+                    .buttonStyle(.bordered)
+                }
+                
+                Spacer()
+            }
+        }
+    }
+}
+
+#Podgląd {
+    AddNewGenre()
+}
+```
+
+Teraz dodamy punkt uruchomienia dla widoku AddNewGenre. Uruchomimy ten widok z GenreListView, więc dodajmy nowy element paska narzędziowego (ToolBarItem).
+
+```swift
+import SwiftUI
+
+struct GenreListView: View {
+    @Query(sort: \Genre.name) private var genres: [Genre]
+    @State private var isAddNewGenrePresented: Bool = false
+    
+    var body: some View {
+        NavigationStack {
+            List {
+                ForEach(genres) { genre in
+                    Text(genre.name)
+                }
+            }
+            .navigationTitle("Gatunki Literackie")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Dodaj") {
+                        isAddNewGenrePresented.toggle()
+                    }
+                }
+            }
+        }
+        .bottomSheet(isPresented: $isAddNewGenrePresented) {
+            AddNewGenre()
+        }
+    }
+}
+
+#Podgląd {
+    GenreListView()
+}
+```
+
+Teraz możemy dodać nowe gatunki, a widok AddNewGenre będzie wyświetlany jako dolny panel po naciśnięciu przycisku "Dodaj" na liście gatunków literackich.
