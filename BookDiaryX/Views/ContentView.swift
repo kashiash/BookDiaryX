@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-    @State private var presentAddNew = false
+
     var body: some View {
         TabView {
             BookListView()
@@ -21,9 +21,7 @@ Text("Książki")
                 .tabItem {
                     Image(systemName: "gear.circle")
                 }
-//            .sheet(isPresented: $presentAddNew, content: {
-//                AddNewBookView()
-//            })
+
         }
 
     }

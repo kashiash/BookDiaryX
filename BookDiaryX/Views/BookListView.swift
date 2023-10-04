@@ -61,5 +61,5 @@ struct BookListView: View {
 
 #Preview {
     BookListView()
-        .modelContainer(for: [Book.self])
+        .modelContainer(for: [Book.self, Genre.self, Note.self])
 }
