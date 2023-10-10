@@ -15,10 +15,12 @@ final class Note {
     var title: String
     var message: String
     var book: Book?
+    @Attribute(.externalStorage) var photo: Data?
 
-    init(title: String, message: String, book: Book? = nil) {
+    init(title: String, message: String, book: Book? = nil , photo: Data? = nil) {
         self.title = title
         self.message = message
         self.book = book
+        self.photo = photo
     }
 }

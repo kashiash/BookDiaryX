@@ -24,6 +24,8 @@
 		760E60072ACDE73F00924BFF /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760E60062ACDE73F00924BFF /* Genre.swift */; };
 		760E600A2ACDE7B400924BFF /* GenreListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760E60092ACDE7B400924BFF /* GenreListView.swift */; };
 		760E600C2ACDED6100924BFF /* AddNewGenre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760E600B2ACDED6100924BFF /* AddNewGenre.swift */; };
+		763FC7BD2AD573F50008E040 /* GenreSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763FC7BC2AD573F50008E040 /* GenreSelectionView.swift */; };
+		76B0093F2ACEF78C00CEE0CA /* NoteDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B0093E2ACEF78C00CEE0CA /* NoteDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +48,8 @@
 		760E60062ACDE73F00924BFF /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
 		760E60092ACDE7B400924BFF /* GenreListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreListView.swift; sourceTree = "<group>"; };
 		760E600B2ACDED6100924BFF /* AddNewGenre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewGenre.swift; sourceTree = "<group>"; };
+		763FC7BC2AD573F50008E040 /* GenreSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreSelectionView.swift; sourceTree = "<group>"; };
+		76B0093E2ACEF78C00CEE0CA /* NoteDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,16 +85,11 @@
 			children = (
 				760E60082ACDE7A400924BFF /* Views */,
 				760E5FDE2ACC1B5B00924BFF /* Models */,
-				760E5FCF2ACC13F600924BFF /* AddNewBookView.swift */,
-				760E5FD12ACC13F600924BFF /* BookCellView.swift */,
-				760E5FCE2ACC13F600924BFF /* BookDetailView.swift */,
 				760E5FD32ACC13F600924BFF /* PreviewSampleData.swift */,
 				760E5FBF2ACC133B00924BFF /* BookDiaryXApp.swift */,
 				760E5FC32ACC133D00924BFF /* Assets.xcassets */,
 				760E5FC52ACC133D00924BFF /* BookDiaryX.entitlements */,
 				760E5FC62ACC133D00924BFF /* Preview Content */,
-				760E5FDA2ACC17E900924BFF /* AddNewNote.swift */,
-				760E5FDF2ACC205A00924BFF /* NotesListView.swift */,
 			);
 			path = BookDiaryX;
 			sourceTree = "<group>";
@@ -118,8 +117,15 @@
 			children = (
 				760E5FC12ACC133B00924BFF /* ContentView.swift */,
 				760E5FD22ACC13F600924BFF /* BookListView.swift */,
+				760E5FD12ACC13F600924BFF /* BookCellView.swift */,
+				760E5FCF2ACC13F600924BFF /* AddNewBookView.swift */,
+				760E5FCE2ACC13F600924BFF /* BookDetailView.swift */,
 				760E60092ACDE7B400924BFF /* GenreListView.swift */,
 				760E600B2ACDED6100924BFF /* AddNewGenre.swift */,
+				760E5FDF2ACC205A00924BFF /* NotesListView.swift */,
+				760E5FDA2ACC17E900924BFF /* AddNewNote.swift */,
+				76B0093E2ACEF78C00CEE0CA /* NoteDetailView.swift */,
+				763FC7BC2AD573F50008E040 /* GenreSelectionView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -200,7 +206,9 @@
 				760E600C2ACDED6100924BFF /* AddNewGenre.swift in Sources */,
 				760E5FD72ACC13F600924BFF /* BookCellView.swift in Sources */,
 				760E60072ACDE73F00924BFF /* Genre.swift in Sources */,
+				763FC7BD2AD573F50008E040 /* GenreSelectionView.swift in Sources */,
 				760E5FDB2ACC17E900924BFF /* AddNewNote.swift in Sources */,
+				76B0093F2ACEF78C00CEE0CA /* NoteDetailView.swift in Sources */,
 				760E5FC22ACC133B00924BFF /* ContentView.swift in Sources */,
 				760E5FDD2ACC1B4B00924BFF /* Note.swift in Sources */,
 				760E5FD42ACC13F600924BFF /* BookDetailView.swift in Sources */,

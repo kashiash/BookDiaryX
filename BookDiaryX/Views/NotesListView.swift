@@ -15,16 +15,18 @@ struct NotesListView: View {
     var body: some View {
         List {
             ForEach(book.notes) { note in
+                NavigationLink(value: note) {
+                    VStack {
+                        Text(note.title)
+                            .bold()
+                        Text(note.message)
 
-                VStack {
-                    Text(note.title)
-                        .bold()
-                    Text(note.message)
-
+                    }
                 }
             }
             .onDelete(perform: deleteNote(indexSet:))
         }
+        .navigationDestination(for: Note.self, destination: NoteDetailView.init)
     }
 
     private func deleteNote(indexSet: IndexSet) {
