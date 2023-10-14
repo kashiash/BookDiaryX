@@ -38,6 +38,10 @@
 		76B319712ADAA26E00AF1E86 /* Notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 76B3196A2ADAA26E00AF1E86 /* Notes.md */; };
 		76B319722ADAA26E00AF1E86 /* BookListView.md in Resources */ = {isa = PBXBuildFile; fileRef = 76B3196B2ADAA26E00AF1E86 /* BookListView.md */; };
 		76B319732ADAA26E00AF1E86 /* GenreListView.md in Resources */ = {isa = PBXBuildFile; fileRef = 76B3196C2ADAA26E00AF1E86 /* GenreListView.md */; };
+		76B319762ADAA48100AF1E86 /* GenreSelectionView.md in Resources */ = {isa = PBXBuildFile; fileRef = 76B319742ADAA48100AF1E86 /* GenreSelectionView.md */; };
+		76B319772ADAA48100AF1E86 /* ModyfikacjeBookDetailView.md in Resources */ = {isa = PBXBuildFile; fileRef = 76B319752ADAA48100AF1E86 /* ModyfikacjeBookDetailView.md */; };
+		76B319792ADAA49C00AF1E86 /* 2023-10-03_12-49-20 (1).gif in Resources */ = {isa = PBXBuildFile; fileRef = 76B319782ADAA49C00AF1E86 /* 2023-10-03_12-49-20 (1).gif */; };
+		76B3197B2ADAA4A500AF1E86 /* 2023-10-03_12-43-34 (1).gif in Resources */ = {isa = PBXBuildFile; fileRef = 76B3197A2ADAA4A500AF1E86 /* 2023-10-03_12-43-34 (1).gif */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +78,10 @@
 		76B3196A2ADAA26E00AF1E86 /* Notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Notes.md; sourceTree = "<group>"; };
 		76B3196B2ADAA26E00AF1E86 /* BookListView.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = BookListView.md; sourceTree = "<group>"; };
 		76B3196C2ADAA26E00AF1E86 /* GenreListView.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = GenreListView.md; sourceTree = "<group>"; };
+		76B319742ADAA48100AF1E86 /* GenreSelectionView.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = GenreSelectionView.md; sourceTree = "<group>"; };
+		76B319752ADAA48100AF1E86 /* ModyfikacjeBookDetailView.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = ModyfikacjeBookDetailView.md; sourceTree = "<group>"; };
+		76B319782ADAA49C00AF1E86 /* 2023-10-03_12-49-20 (1).gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "2023-10-03_12-49-20 (1).gif"; sourceTree = "<group>"; };
+		76B3197A2ADAA4A500AF1E86 /* 2023-10-03_12-43-34 (1).gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "2023-10-03_12-43-34 (1).gif"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +175,10 @@
 		76B319572ADA989E00AF1E86 /* Docs */ = {
 			isa = PBXGroup;
 			children = (
+				76B3197A2ADAA4A500AF1E86 /* 2023-10-03_12-43-34 (1).gif */,
+				76B319782ADAA49C00AF1E86 /* 2023-10-03_12-49-20 (1).gif */,
+				76B319742ADAA48100AF1E86 /* GenreSelectionView.md */,
+				76B319752ADAA48100AF1E86 /* ModyfikacjeBookDetailView.md */,
 				76B319662ADAA26E00AF1E86 /* AddNewGenreView.md */,
 				76B319692ADAA26E00AF1E86 /* AddNewNote.md */,
 				76B319672ADAA26E00AF1E86 /* BookDetailView.md */,
@@ -241,9 +253,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				76B319722ADAA26E00AF1E86 /* BookListView.md in Resources */,
+				76B319792ADAA49C00AF1E86 /* 2023-10-03_12-49-20 (1).gif in Resources */,
+				76B319772ADAA48100AF1E86 /* ModyfikacjeBookDetailView.md in Resources */,
 				76B319642ADA9D5D00AF1E86 /* Genres.md in Resources */,
 				76B3196E2ADAA26E00AF1E86 /* BookDetailView.md in Resources */,
 				76B319652ADA9D5D00AF1E86 /* AddNewBookView.md in Resources */,
+				76B319762ADAA48100AF1E86 /* GenreSelectionView.md in Resources */,
 				76B3196D2ADAA26E00AF1E86 /* AddNewGenreView.md in Resources */,
 				76B319612ADA9AE500AF1E86 /* Model Book.md in Resources */,
 				76B3195F2ADA9A8D00AF1E86 /* Readme.md in Resources */,
@@ -252,6 +267,7 @@
 				76B319732ADAA26E00AF1E86 /* GenreListView.md in Resources */,
 				76B3196F2ADAA26E00AF1E86 /* NotesListView.md in Resources */,
 				76B319712ADAA26E00AF1E86 /* Notes.md in Resources */,
+				76B3197B2ADAA4A500AF1E86 /* 2023-10-03_12-43-34 (1).gif in Resources */,
 				76B319702ADAA26E00AF1E86 /* AddNewNote.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
