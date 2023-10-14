@@ -19,27 +19,27 @@ Będziemy tworzyć aplikację do logowania czytanych książek. Ta aplikacja bę
 
 [Model Books](Docs/model book.md)
 
-​	[AddNewBook](docs/ [AddNewBookView.md] )
+​	[AddNewBook](Docs/ [AddNewBookView.md] )
 
 ​	[BookListView](Docs/BookListView.md)
 
-​	[BookDetailView](docs/BookDetailView.md)
+​	[BookDetailView](Docs/BookDetailView.md)
 
 [Notatki - relacja 1:N](Docs/Notes.md)
 
 ​	[Add new note ](Docs/AddNewNote.md)
 
-​	[Notes List View](docs/NotesListView.md)
+​	[Notes List View](Docs/NotesListView.md)
 
-[Gatunki literackie - relacja M-N](docs/genres.md)
+[Gatunki literackie - relacja M-N](Docs/genres.md)
 
-​	[GenreListView](docs/GenreListView.md)
+​	[GenreListView](Docs/GenreListView.md)
 
-​	[AddNewGenreView](docs/addNewGenreView.md)
+​	[AddNewGenreView](Docs/addNewGenreView.md)
 
-​	[Wybieranie gatunków listeracjich](docs\GenreSelectionView.md)
+​	[Wybieranie gatunków listeracjich](Docs\GenreSelectionView.md)
 
-​	[Edycja gatunków  w BookDetailView](docs/ModyfikacjeBookDetailView.md)
+​	[Edycja gatunków  w BookDetailView](Docs/ModyfikacjeBookDetailView.md)
 
 
 
