@@ -23,7 +23,7 @@ Będziemy tworzyć aplikację do logowania czytanych książek. Ta aplikacja bę
 
 ​	[BookListView](Docs/BookListView.md)
 
-​	[BookDetailView](BookDetailView.md)
+​	[BookDetailView](docs/BookDetailView.md)
 
 [Notatki - relacja 1:N](Docs/Notes.md)
 
