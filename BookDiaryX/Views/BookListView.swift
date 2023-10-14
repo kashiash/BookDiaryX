@@ -25,7 +25,7 @@ struct BookListView: View {
             .toolbar {
                 ToolbarItem() {
                     Button("",systemImage: "wand.and.stars.inverse"){
-                        context.insert(Book.generateRandomBook())
+                      //  context.insert(Book.generateRandomBook())
                     }
                 }
                 ToolbarItem(placement: .topBarTrailing) {
@@ -60,6 +60,9 @@ struct BookListView: View {
 }
 
 #Preview {
-    BookListView()
-        .modelContainer(for: [Book.self, Genre.self, Note.self])
+    let preview = Preview(Book.self)
+    preview.addExamples(Book.sampleBooks)
+
+   return BookListView()
+        .modelContainer(preview.container)
 }

@@ -20,12 +20,17 @@
 		760E5FDB2ACC17E900924BFF /* AddNewNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760E5FDA2ACC17E900924BFF /* AddNewNote.swift */; };
 		760E5FDD2ACC1B4B00924BFF /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760E5FDC2ACC1B4B00924BFF /* Note.swift */; };
 		760E5FE02ACC205A00924BFF /* NotesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760E5FDF2ACC205A00924BFF /* NotesListView.swift */; };
-		760E5FE22ACC239400924BFF /* Readme.md in Resources */ = {isa = PBXBuildFile; fileRef = 760E5FE12ACC239400924BFF /* Readme.md */; };
 		760E60072ACDE73F00924BFF /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760E60062ACDE73F00924BFF /* Genre.swift */; };
 		760E600A2ACDE7B400924BFF /* GenreListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760E60092ACDE7B400924BFF /* GenreListView.swift */; };
 		760E600C2ACDED6100924BFF /* AddNewGenre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760E600B2ACDED6100924BFF /* AddNewGenre.swift */; };
 		763FC7BD2AD573F50008E040 /* GenreSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763FC7BC2AD573F50008E040 /* GenreSelectionView.swift */; };
 		76B0093F2ACEF78C00CEE0CA /* NoteDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B0093E2ACEF78C00CEE0CA /* NoteDetailView.swift */; };
+		76B319542ADA947400AF1E86 /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B319532ADA947400AF1E86 /* Preview.swift */; };
+		76B319562ADA956600AF1E86 /* BookSamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B319552ADA956600AF1E86 /* BookSamples.swift */; };
+		76B3195C2ADA9A8100AF1E86 /* Dopisywanie nowej ksiązki AddNewBookView.md in Resources */ = {isa = PBXBuildFile; fileRef = 76B3195A2ADA9A8100AF1E86 /* Dopisywanie nowej ksiązki AddNewBookView.md */; };
+		76B3195D2ADA9A8100AF1E86 /* Relacja Wiele do wielu czyli gatunki literackie.md in Resources */ = {isa = PBXBuildFile; fileRef = 76B3195B2ADA9A8100AF1E86 /* Relacja Wiele do wielu czyli gatunki literackie.md */; };
+		76B3195F2ADA9A8D00AF1E86 /* Readme.md in Resources */ = {isa = PBXBuildFile; fileRef = 76B3195E2ADA9A8D00AF1E86 /* Readme.md */; };
+		76B319612ADA9AE500AF1E86 /* Model Book.md in Resources */ = {isa = PBXBuildFile; fileRef = 76B319602ADA9AE500AF1E86 /* Model Book.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,12 +49,17 @@
 		760E5FDA2ACC17E900924BFF /* AddNewNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewNote.swift; sourceTree = "<group>"; };
 		760E5FDC2ACC1B4B00924BFF /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		760E5FDF2ACC205A00924BFF /* NotesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesListView.swift; sourceTree = "<group>"; };
-		760E5FE12ACC239400924BFF /* Readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
 		760E60062ACDE73F00924BFF /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
 		760E60092ACDE7B400924BFF /* GenreListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreListView.swift; sourceTree = "<group>"; };
 		760E600B2ACDED6100924BFF /* AddNewGenre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewGenre.swift; sourceTree = "<group>"; };
 		763FC7BC2AD573F50008E040 /* GenreSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreSelectionView.swift; sourceTree = "<group>"; };
 		76B0093E2ACEF78C00CEE0CA /* NoteDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailView.swift; sourceTree = "<group>"; };
+		76B319532ADA947400AF1E86 /* Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
+		76B319552ADA956600AF1E86 /* BookSamples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSamples.swift; sourceTree = "<group>"; };
+		76B3195A2ADA9A8100AF1E86 /* Dopisywanie nowej ksiązki AddNewBookView.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "Dopisywanie nowej ksiązki AddNewBookView.md"; sourceTree = "<group>"; };
+		76B3195B2ADA9A8100AF1E86 /* Relacja Wiele do wielu czyli gatunki literackie.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "Relacja Wiele do wielu czyli gatunki literackie.md"; sourceTree = "<group>"; };
+		76B3195E2ADA9A8D00AF1E86 /* Readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = SOURCE_ROOT; };
+		76B319602ADA9AE500AF1E86 /* Model Book.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "Model Book.md"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,7 +76,7 @@
 		760E5FB32ACC133B00924BFF = {
 			isa = PBXGroup;
 			children = (
-				760E5FE12ACC239400924BFF /* Readme.md */,
+				76B319572ADA989E00AF1E86 /* Docs */,
 				760E5FBE2ACC133B00924BFF /* BookDiaryX */,
 				760E5FBD2ACC133B00924BFF /* Products */,
 			);
@@ -83,6 +93,7 @@
 		760E5FBE2ACC133B00924BFF /* BookDiaryX */ = {
 			isa = PBXGroup;
 			children = (
+				76B319522ADA945500AF1E86 /* Preview */,
 				760E60082ACDE7A400924BFF /* Views */,
 				760E5FDE2ACC1B5B00924BFF /* Models */,
 				760E5FD32ACC13F600924BFF /* PreviewSampleData.swift */,
@@ -128,6 +139,26 @@
 				763FC7BC2AD573F50008E040 /* GenreSelectionView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		76B319522ADA945500AF1E86 /* Preview */ = {
+			isa = PBXGroup;
+			children = (
+				76B319532ADA947400AF1E86 /* Preview.swift */,
+				76B319552ADA956600AF1E86 /* BookSamples.swift */,
+			);
+			path = Preview;
+			sourceTree = "<group>";
+		};
+		76B319572ADA989E00AF1E86 /* Docs */ = {
+			isa = PBXGroup;
+			children = (
+				76B3195E2ADA9A8D00AF1E86 /* Readme.md */,
+				76B319602ADA9AE500AF1E86 /* Model Book.md */,
+				76B3195A2ADA9A8100AF1E86 /* Dopisywanie nowej ksiązki AddNewBookView.md */,
+				76B3195B2ADA9A8100AF1E86 /* Relacja Wiele do wielu czyli gatunki literackie.md */,
+			);
+			path = Docs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -188,9 +219,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76B319612ADA9AE500AF1E86 /* Model Book.md in Resources */,
+				76B3195F2ADA9A8D00AF1E86 /* Readme.md in Resources */,
 				760E5FC82ACC133D00924BFF /* Preview Assets.xcassets in Resources */,
+				76B3195D2ADA9A8100AF1E86 /* Relacja Wiele do wielu czyli gatunki literackie.md in Resources */,
+				76B3195C2ADA9A8100AF1E86 /* Dopisywanie nowej ksiązki AddNewBookView.md in Resources */,
 				760E5FC42ACC133D00924BFF /* Assets.xcassets in Resources */,
-				760E5FE22ACC239400924BFF /* Readme.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -205,9 +239,11 @@
 				760E5FD52ACC13F600924BFF /* AddNewBookView.swift in Sources */,
 				760E600C2ACDED6100924BFF /* AddNewGenre.swift in Sources */,
 				760E5FD72ACC13F600924BFF /* BookCellView.swift in Sources */,
+				76B319562ADA956600AF1E86 /* BookSamples.swift in Sources */,
 				760E60072ACDE73F00924BFF /* Genre.swift in Sources */,
 				763FC7BD2AD573F50008E040 /* GenreSelectionView.swift in Sources */,
 				760E5FDB2ACC17E900924BFF /* AddNewNote.swift in Sources */,
+				76B319542ADA947400AF1E86 /* Preview.swift in Sources */,
 				76B0093F2ACEF78C00CEE0CA /* NoteDetailView.swift in Sources */,
 				760E5FC22ACC133B00924BFF /* ContentView.swift in Sources */,
 				760E5FDD2ACC1B4B00924BFF /* Note.swift in Sources */,
