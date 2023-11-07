@@ -82,3 +82,189 @@ struct BookListView: View {
 
 ```
 
+### Wyszkiwanie i filtrowanie w `GenreListView`
+
+Makro `Query` odgrywa kluczową rolę w ekosystemie SwiftData, przede wszystkim pełniąc funkcję kamienia węgielnego w procesie pozyskiwania i przetwarzania danych. Dotychczas ograniczyliśmy się do podstawowych scenariuszy korzystania z tego makra do dostępu do książek z magazynu trwałego, ale nasze użycie było dotąd ograniczone. Zanurzmy się głębiej w możliwości makra `Query`.
+
+Do zbadania makra `Query` użyjemy widoku `GenreListView`. Zauważ, że makro `Query`, które stosujemy dla gatunku (Genre), pobiera dane posortowane według nazwy.
+
+```swift
+@Query(sort: \Genre.name) private var genres: [Genre]
+```
+
+Jednak makro `Query` nie wymaga tego parametru i może działać także bez niego.
+```swift
+@Query private var genres: [Genre]
+```
+
+Skorzystajmy z pierwszej przeciążonej wersji, która przyjmuje jako parametr `FetchDescriptor`. `FetchDescriptor` to typ opisujący kryteria, porządek sortowania oraz wszelkie dodatkowe konfiguracje do użycia podczas operacji pobierania danych.
+`FetchDescriptor` przyjmuje jako parametr predykat, który jest warunkiem logicznym używanym do testowania zestawu wartości wejściowych podczas wyszukiwania lub filtrowania.
+W naszym przypadku będziemy filtrować gatunki za pomocą słowa kluczowego "fiction".
+```swift
+let fetchDescriptor = FetchDescriptor(predicate: "genre == 'fiction'")
+```
+
+W naszym przypadku będziemy filtrować gatunki za pomocą słowa kluczowego "fiction". Oto kod z uwzględnieniem tych instrukcji:
+
+```swift
+@Query(
+    FetchDescriptor<Genre>(predicate: #Predicate {
+        $0.name.localizedStandardContains(
+            "fiction"
+        )
+    })
+)
+private var genres: [Genre]
+```
+
+Zbuduj i uruchom, aby zobaczyć widok `GenreListView` przefiltrowany za pomocą słowa kluczowego "fiction".
+
+To tłumaczenie jest wykonywane na poziomie bazy danych, podobnie jak w przypadku wykonania zapytania SQL z warunkiem `WHERE CONTAINS`.
+
+```swift
+@Query(
+    FetchDescriptor<Genre>(predicate: #Predicate {
+        $0.name.localizedStandardContains(
+            "fiction"
+        )
+    },
+    animation: .bouncy)
+)
+```
+
+Oprócz `FetchDescriptor`, makro `Query` może również przyjmować parametry `filter`, `sort`, `order` i `animation`. Teraz wypróbujemy je.
+
+Rozpoczniemy od parametru `filter`, który posłuży do filtrowania wyników za pomocą predykatu.
+
+```swift
+@Query(filter: #Predicate<Genre> { $0.name.localizedStandardContains("sci") })
+private var genres: [Genre]
+```
+
+Możemy sortować wyniki na poziomie zapytania do bazy danych, przekazując parametr `sort`, możemy również ustawić kolejność sortowania w przód/lub wstecz za pomocą parametru `order`.
+
+```swift
+@Query(sort: \Genre.name, order: .reverse)
+private var genres: [Genre]
+```
+
+Możemy połączyć filtrowanie oraz sortowanie w jednym zapytaniu. Będziemy filtrować wyniki według słowa kluczowego "fic" i sortować gatunki według nazwy w odwrotnej kolejności.
+
+```swift
+@Query(filter: #Predicate<Genre> {
+        $0.name.localizedStandardContains("fic")},
+       sort: \Genre.name,
+       order: .reverse)
+private var genres: [Genre]
+```
+
+Teraz, gdy posiadamy nieco więcej informacji na temat makra Query, użyjmy go do budowy funkcjonalności dynamicznego sortowania. Dotychczas widzieliśmy przykłady filtrowania i sortowania statycznych danych, ale możemy to wszystko robić także dynamicznie. Musimy tylko trochę zmodyfikować nasz kod.
+
+Mając na uwadze, że FetchDescriptor może przyjmować jako parametr SortDescriptor, możemy wykorzystać tę wiedzę, aby stworzyć dynamiczny mechanizm sortowania. Na początek wprowadźmy nowe wyliczenie, GenreSortOrder, jako nasz pierwszy krok.
+
+```swift
+enum GenreSortOrder: String, Identifiable, CaseIterable {
+    case forward
+    case reverse
+    
+    var id: Self { return self }
+    
+    var title: String {
+        switch self {
+        case .forward:
+            return "Przód"
+        case .reverse:
+            return "Tył"
+        }
+    }
+    
+    var sortOption: SortDescriptor<Genre> {
+        switch self {
+        case .forward:
+            return SortDescriptor(\Genre.name, order: .forward)
+        case .reverse:
+            return SortDescriptor(\Genre.name, order: .reverse)
+        }
+    }
+}
+```
+
+W tym przypadku wyliczenie GenreSortOrder zawiera dwa przypadki: forward (przód) i reverse (tył). Każdy przypadek ma swoje wartości składowe: id, którym jest sam siebie, oraz tytuł, który zmienia się w zależności od przypadku. Dodatkowo, mamy właściwość sortOption, która zwraca odpowiedni SortDescriptor na podstawie wybranego przypadku sortowania. Teraz możemy użyć tego wyliczenia do dynamicznego ustalania kolejności sortowania w naszym zapytaniu Query.
+
+Następnie, przeprowadzimy refaktoryzację widoku `GenreListView`, tworząc podwidok dla kodu odpowiedzialnego za pobieranie gatunków z magazynu danych. Ten podwidok będzie przyjmować `sortOrder` jako parametr inicjalizacyjny, a nasze dynamiczne zapytanie Query będzie oparte na wybranej kolejności sortowania.
+
+```swift
+struct GenreListSubview: View {
+    @Query private var genres: [Genre]
+    @Environment(\.modelContext) private var context
+    
+    init(sortOrder: GenreSortOrder = .forward) {
+        _genres = Query(FetchDescriptor<Genre>(sortBy: [sortOrder.sortOption]), animation: .snappy)
+    }
+    
+    var body: some View {
+        List {
+            ForEach(genres) { genre in
+                NavigationLink(destination: GenreDetailView(genre: genre)) {
+                    Text(genre.name)
+                }
+            }
+            .onDelete(perform: deleteGenre)
+        }
+    }
+    
+    private func deleteGenre(at offsets: IndexSet) {
+        offsets.forEach { index in
+            let genreToDelete = genres[index]
+            context.delete(genreToDelete)
+            do {
+                try context.save()
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+    }
+}
+```
+
+Ostatnim, ale nie najmniej ważnym krokiem będzie dodanie przycisku w pasku narzędziowym, który pozwoli nam sortować naszą listę gatunków w kolejności rosnącej i malejącej.
+
+```swift
+import SwiftUI
+import SwiftData
+
+struct GenreListView: View {
+    @State private var presentAddNew = false
+    @State private var sortOption: GenreSortOrder = .forward
+    
+    var body: some View {
+        NavigationStack {
+            GenreListSubview(sortOrder: sortOption)
+                .navigationTitle("Gatunki Literackie")
+                .toolbar {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button(action: {
+                            presentAddNew.toggle()
+                        }) {
+                            Image(systemName: "plus")
+                        }
+                        .sheet(isPresented: $presentAddNew) {
+                            // Implementuj widok do dodawania nowego gatunku literackiego
+                            // np. AddGenreView()
+                        }
+                    }
+                    
+                    ToolbarItem(placement: .topBarLeading) {
+                        Button(action: {
+                            sortOption = sortOption == .forward ? .reverse : .forward
+                        }) {
+                            Image(systemName: "arrow.up.arrow.down")
+                        }
+                        .buttonStyle(.borderedProminent)
+                    }
+                }
+        }
+    }
+}
+```
+
