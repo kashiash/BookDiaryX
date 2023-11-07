@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import SwiftData
+import PhotosUI
 
 struct AddNewBookView: View {
     @Environment(\.modelContext) private var context
@@ -21,6 +23,8 @@ struct AddNewBookView: View {
          !title.isEmpty && !author.isEmpty && publishedYear != nil
      }
 
+    @State private var selectedCover: PhotosPickerItem?
+    @State private var selectedCoverData: Data?
 
     var body: some View {
 
@@ -32,10 +36,43 @@ struct AddNewBookView: View {
                 Text("Author:")
                 TextField("Enter author",text: $author)
                     .textFieldStyle(.roundedBorder)
+
+
                 Text("Published:")
                 TextField("Enter published year",value: $publishedYear,format: .number)
                     .textFieldStyle(.roundedBorder)
                     .keyboardType(.numberPad)
+
+                Section {
+                HStack {
+                    PhotosPicker(
+                        selection: $selectedCover,
+                        matching: .images,
+                        photoLibrary: .shared()
+                    ) {
+                        Label("Add Cover", systemImage: "book.closed")
+                    }
+                    .padding(.vertical)
+                    Spacer()
+
+                        if let selectedCoverData,
+                           let image = UIImage(data: selectedCoverData) {
+                            Image(uiImage: image)
+                                .resizable()
+                                .scaledToFit()
+                                .clipShape(.rect(cornerRadius: 10))
+                                .frame(width: 100, height: 100)
+
+
+                        } else {
+                            Image(systemName: "photo")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 100, height: 100)
+                        }
+                    }
+                }
+
                     GenreSelectionView(selectedGenres: $selectedGenres)
                 HStack{
                     Button("Cancel", role: .destructive) {
@@ -48,6 +85,11 @@ struct AddNewBookView: View {
                         let book = Book(title:title, author: author, publishedYear: publishedYear)
 
                         book.genres = Array(selectedGenres)
+
+                        if let selectedCoverData {
+                            book.cover = selectedCoverData
+                        }
+                        
                         selectedGenres.forEach{ genre in
                             genre.books.append(book)
                             context.insert(genre)
@@ -66,12 +108,21 @@ struct AddNewBookView: View {
                 Spacer()
             }
            .padding()
-//            .navigationTitle("Add new book")
+           .navigationTitle("Add new book")
+           .navigationBarTitleDisplayMode(.inline)
+           .task(id: selectedCover) {
+               if let data = try? await selectedCover?.loadTransferable(type: Data.self) {
+                   selectedCoverData = data
+               }
+           }
         }
-        .ignoresSafeArea()
+        //.ignoresSafeArea()
     }
 }
 
 #Preview {
-    AddNewBookView().preferredColorScheme(.dark)
+    NavigationStack {
+        AddNewBookView()
+            //.preferredColorScheme(.dark)
+    }
 }

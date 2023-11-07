@@ -15,11 +15,11 @@ SwiftData automatycznie buduje schemat przy użyciu naszych modeli i skutecznie 
 Aby lepiej zrozumieć to zagadnienie, pracujmy nad aplikacją obsługiwaną przez SwiftData.
 Będziemy tworzyć aplikację do logowania czytanych książek. Ta aplikacja będzie śledzić wszystkie przeczytane przez nas książki. Aplikacja ta będzie także miała sekcję na notatki do każdej książki, dzięki czemu będziemy mogli zapamiętać ważne aspekty książki za pomocą zapisanych notatek.
 
-
+## Spis treści
 
 [Model Books](Docs/model book.md)
 
-​	[AddNewBook](Docs/ [AddNewBookView.md] )
+​	[AddNewBook](Docs/[AddNewBookView.md] )
 
 ​	[BookListView](Docs/BookListView.md)
 
@@ -33,13 +33,19 @@ Będziemy tworzyć aplikację do logowania czytanych książek. Ta aplikacja bę
 
 [Gatunki literackie - relacja M-N](Docs/genres.md)
 
-​	[GenreListView](Docs/GenreListView.md)
+​	[Przeglądanie gatunków literackich GenreListView](Docs/GenreListView.md)
 
-​	[AddNewGenreView](Docs/addNewGenreView.md)
+​	[Dopisywanie nowych gatunków AddNewGenreView](Docs/addNewGenreView.md)
 
 ​	[Wybieranie gatunków listeracjich](Docs\GenreSelectionView.md)
 
 ​	[Edycja gatunków  w BookDetailView](Docs/ModyfikacjeBookDetailView.md)
+
+​	[GenreDetailView - Wyswietlanie ksiazek z konkretnego gatunku w liscie](Docs/GenreDetailView.md)
+
+[Okladka - zdjecia](Docs/BookCover.md)
+
+[Wyszukiwanie na liście](Docs/SearchText.md)
 
 
 

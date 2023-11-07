@@ -44,5 +44,8 @@ struct NotesListView: View {
 }
 
 //#Preview {
-//    NotesListView()
+//    let preview = Preview(Book.self)
+//    let book = Book.bookWithNotes;
+//    NotesListView(book: book)
+//        .modelContainer(preview.container)
 //}

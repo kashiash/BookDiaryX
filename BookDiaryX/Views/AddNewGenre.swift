@@ -34,11 +34,13 @@ struct AddNewGenre: View {
                     dismiss()
                 }
                 .buttonStyle(.borderedProminent)
-
-                Button("Anuluj") {
+                .padding(.horizontal)
+                Spacer()
+              Button("Anuluj") {
                     dismiss()
                 }
                 .buttonStyle(.bordered)
+                .padding(.horizontal)
             }
             Spacer()
         }

@@ -61,5 +61,12 @@ static var sampleBooks:  [Book] {
 
   ]
 }
-
+    static var bookWithNotes: Book {
+        let book = Book(title: "Kubus Puchatek", author: "A.A. Milne", publishedYear: 1926)
+        Note.sampleNotes.forEach { note in
+            note.book = book
+            book.notes.append(note)
+        }
+        return book
+    }
 }

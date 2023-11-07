@@ -6,6 +6,7 @@
 //
 import SwiftData
 import SwiftUI
+import PhotosUI
 
 struct BookDetailView: View {
     var book: Book
@@ -22,6 +23,9 @@ struct BookDetailView: View {
 
     @State private var selectedGenres = Set<Genre>()
 
+    @State private var selectedCover: PhotosPickerItem?
+    @State private var selectedCoverData: Data?
+
     init(book: Book) {
         self.book = book
         self._title = State.init(initialValue: book.title)
@@ -36,17 +40,60 @@ struct BookDetailView: View {
                 Group {
                     TextField("Book title", text: $title)
                     TextField("Book author", text: $author)
-                    TextField("Published year", value: $publishedYear, formatter: NumberFormatter())
-                        .keyboardType(.numberPad)
+                    TextField("Published year",
+                              value: $publishedYear,
+                              formatter: NumberFormatter())
+                    .keyboardType(.numberPad)
+
+                    HStack {
+                        PhotosPicker(
+                            selection: $selectedCover,
+                            matching: .images,
+                            photoLibrary: .shared()
+                        ) {
+                            Label(book.cover == nil ? "Add Cover" : "Update Cover", systemImage: "book.closed")
+                        }
+                        .padding(.vertical)
+
+                        Spacer()
+
+                        if let selectedCoverData,
+                           let image = UIImage(data: selectedCoverData) {
+                            Image(uiImage: image)
+                                .resizable()
+                                .scaledToFit()
+                                .clipShape(.rect(cornerRadius: 10))
+                                .frame(width: 100, height: 100)
+
+
+                        } else if let cover = book.cover, let image = UIImage(data: cover) {
+                            Image(uiImage: image)
+                                .resizable()
+                                .scaledToFit()
+                                .clipShape(.rect(cornerRadius: 5))
+                                .frame(height: 100)
+                        } else {
+                            Image(systemName: "photo")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 100, height: 100)
+                        }
+                    }
+
                     GenreSelectionView(selectedGenres: $selectedGenres)
                         .frame(height: 300)
                 }
                 .textFieldStyle(.roundedBorder)
+
                 Button("Save") {
                     guard let publishedYear = publishedYear else { return }
                     book.title = title
                     book.author = author
                     book.publishedYear = publishedYear
+
+                    if let selectedCoverData {
+                        book.cover = selectedCoverData
+                    }
 
                     book.genres = []
                     book.genres = Array(selectedGenres)
@@ -70,6 +117,7 @@ struct BookDetailView: View {
                 Text(book.title)
                 Text(book.author)
                 Text(book.publishedYear.description)
+
                 if !book.genres.isEmpty {
                     HStack {
                         ForEach(book.genres) { genre in
@@ -78,6 +126,19 @@ struct BookDetailView: View {
                                 .padding(.horizontal)
                                 .background(Color.green.opacity(0.3), in: Capsule())
                         }
+                    }
+                }
+
+                if let cover = book.cover, let image = UIImage(data: cover) {
+                    HStack {
+                        Text("Book Cover")
+                        Spacer()
+                        Image(uiImage: image)
+                            .resizable()
+                            .scaledToFit()
+                            .clipShape(Rectangle())
+                            .cornerRadius(5)
+                            .frame(height: 100)
                     }
                 }
             }
@@ -107,19 +168,20 @@ struct BookDetailView: View {
             }
         }
         .navigationTitle("Book Detail")
+        .navigationBarTitleDisplayMode(.inline)
+        .task(id: selectedCover) {
+            if let data = try? await selectedCover?.loadTransferable(type: Data.self) {
+                selectedCoverData = data
+            }
+        }
     }
 }
 
 #Preview {
-    do {
-        let config = ModelConfiguration(isStoredInMemoryOnly: true)
-        let container = try ModelContainer(for: Book.self, configurations: config)
-        let example = Book.generateRandomBook()
+    let preview = Preview(Book.self)
+    return NavigationStack {
+        BookDetailView(book: Book.sampleBooks[8])
+            .modelContainer(preview.container)
 
-        return BookDetailView(book: example)
-            .modelContainer(container)
-    } catch {
-        fatalError("Coś się zjebsuło")
     }
-
 }
