@@ -20,12 +20,21 @@ struct BookListView: View {
     }
 
     var body: some View {
-        NavigationStack{
+
             List{
                 ForEach(filteredBooks) { book in
                     BookCellView(book: book)
                 }
                 .onDelete(perform: delete(indexSet:))
+            }
+            .navigationDestination(for: NavigationRoute.self) { route in
+                switch route {
+                case .book(let book): BookDetailView(book: book)
+                case .genre(let genre): GenreDetailView(genre: genre)
+                case .note(let note): NoteDetailView(note: note)
+                case .settings:
+                    SettingsView()
+                }
             }
             .searchable(text: $searchTerm, placement: .navigationBarDrawer(displayMode: .automatic), prompt: "Wyszukaj książki")
             .navigationTitle("Lista książek")
@@ -36,8 +45,6 @@ struct BookListView: View {
                     }
                 }
                 ToolbarItem(placement: .topBarTrailing) {
-
-                    
                     Button{
                         presentAddNew.toggle()
                     } label: {
@@ -49,7 +56,6 @@ struct BookListView: View {
                     })
                 }
             }
-        }
     }
 
     private func delete(indexSet: IndexSet) {

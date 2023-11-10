@@ -35,145 +35,147 @@ struct BookDetailView: View {
     }
 
     var body: some View {
-        Form {
-            if isEditing {
-                Group {
-                    TextField("Book title", text: $title)
-                    TextField("Book author", text: $author)
-                    TextField("Published year",
-                              value: $publishedYear,
-                              formatter: NumberFormatter())
-                    .keyboardType(.numberPad)
 
-                    HStack {
-                        PhotosPicker(
-                            selection: $selectedCover,
-                            matching: .images,
-                            photoLibrary: .shared()
-                        ) {
-                            Label(book.cover == nil ? "Add Cover" : "Update Cover", systemImage: "book.closed")
+            Form {
+                if isEditing {
+                    Group {
+                        TextField("Book title", text: $title)
+                        TextField("Book author", text: $author)
+                        TextField("Published year",
+                                  value: $publishedYear,
+                                  formatter: NumberFormatter())
+                        .keyboardType(.numberPad)
+
+                        HStack {
+                            PhotosPicker(
+                                selection: $selectedCover,
+                                matching: .images,
+                                photoLibrary: .shared()
+                            ) {
+                                Label(book.cover == nil ? "Add Cover" : "Update Cover", systemImage: "book.closed")
+                            }
+                            .padding(.vertical)
+
+                            Spacer()
+
+                            if let selectedCoverData,
+                               let image = UIImage(data: selectedCoverData) {
+                                Image(uiImage: image)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .clipShape(.rect(cornerRadius: 10))
+                                    .frame(width: 100, height: 100)
+
+
+                            } else if let cover = book.cover, let image = UIImage(data: cover) {
+                                Image(uiImage: image)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .clipShape(.rect(cornerRadius: 5))
+                                    .frame(height: 100)
+                            } else {
+                                Image(systemName: "photo")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 100, height: 100)
+                            }
                         }
-                        .padding(.vertical)
 
-                        Spacer()
+                            GenreSelectionView(selectedGenres: $selectedGenres)
+                            .frame(height: 300)
+                    }
+                    .textFieldStyle(.roundedBorder)
 
-                        if let selectedCoverData,
-                           let image = UIImage(data: selectedCoverData) {
-                            Image(uiImage: image)
-                                .resizable()
-                                .scaledToFit()
-                                .clipShape(.rect(cornerRadius: 10))
-                                .frame(width: 100, height: 100)
+                    Button("Save") {
+                        guard let publishedYear = publishedYear else { return }
+                        book.title = title
+                        book.author = author
+                        book.publishedYear = publishedYear
 
-
-                        } else if let cover = book.cover, let image = UIImage(data: cover) {
-                            Image(uiImage: image)
-                                .resizable()
-                                .scaledToFit()
-                                .clipShape(.rect(cornerRadius: 5))
-                                .frame(height: 100)
-                        } else {
-                            Image(systemName: "photo")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 100, height: 100)
+                        if let selectedCoverData {
+                            book.cover = selectedCoverData
                         }
-                    }
 
-                    GenreSelectionView(selectedGenres: $selectedGenres)
-                        .frame(height: 300)
-                }
-                .textFieldStyle(.roundedBorder)
-
-                Button("Save") {
-                    guard let publishedYear = publishedYear else { return }
-                    book.title = title
-                    book.author = author
-                    book.publishedYear = publishedYear
-
-                    if let selectedCoverData {
-                        book.cover = selectedCoverData
-                    }
-
-                    book.genres = []
-                    book.genres = Array(selectedGenres)
-                    selectedGenres.forEach { genre in
-                        if !genre.books.contains(where: { b in
-                            b.title == book.title
-                        }) {
-                            genre.books.append(book)
+                        book.genres = []
+                        book.genres = Array(selectedGenres)
+                        selectedGenres.forEach { genre in
+                            if !genre.books.contains(where: { b in
+                                b.title == book.title
+                            }) {
+                                genre.books.append(book)
+                            }
                         }
-                    }
 
-                    do {
-                        try context.save()
-                    } catch {
-                        print(error.localizedDescription)
-                    }
-
-                    dismiss()
-                }
-            } else {
-                Text(book.title)
-                Text(book.author)
-                Text(book.publishedYear.description)
-
-                if !book.genres.isEmpty {
-                    HStack {
-                        ForEach(book.genres) { genre in
-                            Text(genre.name)
-                                .font(.caption)
-                                .padding(.horizontal)
-                                .background(Color.green.opacity(0.3), in: Capsule())
+                        do {
+                            try context.save()
+                        } catch {
+                            print(error.localizedDescription)
                         }
-                    }
-                }
 
-                if let cover = book.cover, let image = UIImage(data: cover) {
-                    HStack {
-                        Text("Book Cover")
-                        Spacer()
-                        Image(uiImage: image)
-                            .resizable()
-                            .scaledToFit()
-                            .clipShape(Rectangle())
-                            .cornerRadius(5)
-                            .frame(height: 100)
+                        dismiss()
                     }
-                }
-            }
-            Section("Notes") {
-                Button("Add new note") {
-                    showAddNewNote.toggle()
-                }
-                .sheet(isPresented: $showAddNewNote, content: {
-                    NavigationStack {
-                        AddNewNote(book: book)
-                    }
-                    .presentationDetents([.fraction(0.3)])
-                    .interactiveDismissDisabled()
-                })
-                if book.notes.isEmpty {
-                    ContentUnavailableView("No notes", systemImage: "note")
                 } else {
-                    NotesListView(book: book)
+                    Text(book.title)
+                    Text(book.author)
+                    Text(book.publishedYear.description)
+
+                    if !book.genres.isEmpty {
+                        HStack {
+                            ForEach(book.genres) { genre in
+                                Text(genre.name)
+                                    .font(.caption)
+                                    .padding(.horizontal)
+                                    .background(Color.green.opacity(0.3), in: Capsule())
+                            }
+                        }
+                    }
+
+                    if let cover = book.cover, let image = UIImage(data: cover) {
+                        HStack {
+                            Text("Book Cover")
+                            Spacer()
+                            Image(uiImage: image)
+                                .resizable()
+                                .scaledToFit()
+                                .clipShape(Rectangle())
+                                .cornerRadius(5)
+                                .frame(height: 100)
+                        }
+                    }
+                }
+                Section("Notes") {
+                    Button("Add new note") {
+                        showAddNewNote.toggle()
+                    }
+                    .sheet(isPresented: $showAddNewNote, content: {
+                        NavigationStack {
+                            AddNewNote(book: book)
+                        }
+                        .presentationDetents([.fraction(0.3)])
+                        .interactiveDismissDisabled()
+                    })
+                    if book.notes.isEmpty {
+                        ContentUnavailableView("No notes", systemImage: "note")
+                    } else {
+                        NotesListView(book: book)
+                    }
                 }
             }
-        }
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                Button(isEditing ? "Cancel" : "Edit") {
-                    isEditing.toggle()
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button(isEditing ? "Cancel" : "Edit") {
+                        isEditing.toggle()
+                    }
                 }
             }
-        }
-        .navigationTitle("Book Detail")
-        .navigationBarTitleDisplayMode(.inline)
-        .task(id: selectedCover) {
-            if let data = try? await selectedCover?.loadTransferable(type: Data.self) {
-                selectedCoverData = data
+            .navigationTitle("Book Detail")
+            .navigationBarTitleDisplayMode(.inline)
+            .task(id: selectedCover) {
+                if let data = try? await selectedCover?.loadTransferable(type: Data.self) {
+                    selectedCoverData = data
+                }
             }
-        }
+        
     }
 }
 

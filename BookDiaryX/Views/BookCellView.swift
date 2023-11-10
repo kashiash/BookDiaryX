@@ -10,7 +10,7 @@ import SwiftUI
 struct BookCellView: View {
     let book: Book
     var body: some View {
-        NavigationLink (value: book){
+        NavigationLink (value: NavigationRoute.book(book)){
             HStack(alignment: .top) {
 
                 if let cover = book.cover,
@@ -37,9 +37,7 @@ struct BookCellView: View {
                 }
 
             }
-            .navigationDestination(for: Book.self) { book in
-                BookDetailView(book: book)
-            }
+
         }
     }
 }

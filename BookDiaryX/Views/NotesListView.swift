@@ -13,20 +13,19 @@ struct NotesListView: View {
     @Environment(\.modelContext) private var context
 
     var body: some View {
-        List {
-            ForEach(book.notes) { note in
-                NavigationLink(value: note) {
-                    VStack {
-                        Text(note.title)
-                            .bold()
-                        Text(note.message)
+            List {
+                ForEach(book.notes) { note in
+                    NavigationLink(value: NavigationRoute.note(note)) {
+                        VStack {
+                            Text(note.title)
+                                .bold()
+                            Text(note.message)
 
+                        }
                     }
                 }
+                .onDelete(perform: deleteNote(indexSet:))
             }
-            .onDelete(perform: deleteNote(indexSet:))
-        }
-        .navigationDestination(for: Note.self, destination: NoteDetailView.init)
     }
 
     private func deleteNote(indexSet: IndexSet) {

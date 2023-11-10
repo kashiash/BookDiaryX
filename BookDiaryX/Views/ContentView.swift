@@ -21,8 +21,13 @@ struct ContentView: View {
                 .tabItem {
                     Image(systemName: "gear.circle")
                 }
+            NotesTabListView()
+                .tabItem {
+                    Image(systemName: "note.text")
+                }
 
         }
+
         .onAppear {
             guard let urlApp = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).last else { return }
 

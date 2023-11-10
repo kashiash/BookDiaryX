@@ -15,13 +15,12 @@ struct GenreListView: View {
     @Environment(\.modelContext) private var context
 
     var body: some View {
-        NavigationStack {
             List {
                 ForEach(genres) { genre in
-                    NavigationLink(destination: GenreDetailView(genre: genre)) {
+                    NavigationLink(value: NavigationRoute.genre(genre)) {
                         Text(genre.name)
+                        NavigationLink(genre.name,value: genre)
                     }
-
                 }
                 .onDelete(perform: deleteGenre)
             }
@@ -41,8 +40,6 @@ struct GenreListView: View {
                     })
                 }
             }
-        }
-
     }
     private func deleteGenre(atOffsets indexSet: IndexSet) {
         indexSet.forEach { index in

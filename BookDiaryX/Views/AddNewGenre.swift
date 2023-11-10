@@ -15,7 +15,6 @@ struct AddNewGenre: View {
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
-        NavigationStack{
             VStack{
                 TextField("Dodaj nowy gatunek", text: $name)
                     .textFieldStyle(.roundedBorder)
@@ -43,7 +42,6 @@ struct AddNewGenre: View {
                 .padding(.horizontal)
             }
             Spacer()
-        }
     }
 }
 
